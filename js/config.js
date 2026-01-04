@@ -26,6 +26,15 @@ const CONFIG = {
       youtube: {
         channelId: "UCin40B5inoY5PHk_Z2MDIvw"
       }
+    },
+    {
+      id: "algae0619",
+      platform: "twitch",
+      name: "搞事的貓_藻藻",
+      avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/360ff93d-5677-4031-8824-0c5842cd0a2e-profile_image-70x70.png",
+      twitch: {
+        channel: "algae0619"
+      }
     }
   ]
 };
