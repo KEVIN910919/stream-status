@@ -1,4 +1,6 @@
 const CONFIG = {
+  apiEndpoint: "https://crimson-shadow-c09a.kevin-tsui910919.workers.dev",
+  
   channels: [
     {
       id: "mo_chan_neko",
@@ -10,22 +12,10 @@ const CONFIG = {
       }
     },
     {
-      id: "AugustusLing",
+      id: "@AugustusLing",
       platform: "youtube",
       name: "Augustus Ling Ch. 奧古斯都‧白翎",
-      avatar: "https://yt3.googleusercontent.com/lgg4GTnUNPmfgSMiicRX-3yg6tJyF7B7Fb6pDlkj8yTrJAZ4mXz6rKYv-48qAOKloZkIS4t_OSI=s160-c-k-c0x00ffffff-no-rj",
-      youtube: {
-        channelId: "UCv0dlxt2yZf2U-n8kyA5hRQ"
-      }
-    },
-    {
-      id: "Miro",
-      platform: "youtube",
-      name: "堕天みろ / Miro Ch.",
-      avatar: "https://yt3.googleusercontent.com/d21aO0udj6__GF0eMrTSHFx3N3kMxkfuNN17TKH_cPcI-8MJrzmzWBshjMhNTY4oiF3U76L7CA=s160-c-k-c0x00ffffff-no-rj",
-      youtube: {
-        channelId: "UCin40B5inoY5PHk_Z2MDIvw"
-      }
+      avatar: "https://yt3.googleusercontent.com/lgg4GTnUNPmfgSMiicRX-3yg6tJyF7B7Fb6pDlkj8yTrJAZ4mXz6rKYv-48qAOKloZkIS4t_OSI=s160-c-k-c0x00ffffff-no-rj"
     },
     {
       id: "algae0619",
