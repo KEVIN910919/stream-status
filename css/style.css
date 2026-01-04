@@ -59,11 +59,10 @@ body {
   display: grid;
   gap: 14px;
 
-  /* 一排最多三個 */
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* 最多三個，且永遠等寬平分 */
+  grid-template-columns: repeat(3, 1fr);
 
-  /* 防止超寬 */
-  max-width: 100%;
+  width: 100%;
 }
 
 /* =========================
