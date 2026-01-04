@@ -65,7 +65,7 @@ body {
 .list {
   display: grid;
   gap: 14px;
-  max-width: 380px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
 /* =========================
