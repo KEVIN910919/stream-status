@@ -187,6 +187,9 @@ body {
   text-decoration: underline;
 }
 
+/* =========================
+   直播預覽
+   ========================= */
 .preview {
   margin-top: 10px;
   aspect-ratio: 16 / 9;
