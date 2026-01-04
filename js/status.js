@@ -4,6 +4,9 @@ CONFIG.channels.forEach(channel => {
   const card = document.createElement("div");
   card.className = "card";
 
+  /* 🔑 平台識別（給 CSS 用） */
+  card.dataset.platform = channel.platform;
+
   card.innerHTML = `
     <div class="header">
       <img class="avatar">
@@ -13,7 +16,7 @@ CONFIG.channels.forEach(channel => {
       </div>
     </div>
     <div class="status">檢查中…</div>
-    <a class="link" target="_blank">前往頻道</a>
+    <a class="link" target="_blank" rel="noopener">前往頻道</a>
   `;
 
   listEl.appendChild(card);
@@ -72,7 +75,7 @@ CONFIG.channels.forEach(channel => {
     document.body.appendChild(iframe);
 
     setTimeout(() => {
-      // 展示型判斷：無法 100% 準確，但符合 GitHub Pages 限制
+      // 展示型判斷（GitHub Pages 限制下的最佳解）
       statusEl.textContent = "⚫ 未偵測到直播";
       statusEl.className = "status offline";
       card.classList.remove("live");
