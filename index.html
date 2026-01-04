@@ -1,18 +1,24 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8">
-  <title>直播狀態by夢光創意</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- 載入 CSS -->
-  <link rel="stylesheet" href="./css/style.css">
+  <title>直播狀態｜夢光創意</title>
+
+  <!-- 主樣式 -->
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
+
 <body>
+  <!-- 模組容器（方便做整體風格與陰影） -->
+  <div class="module">
+    <div id="channelList" class="list"></div>
+  </div>
 
-  <div id="channelList" class="list"></div>
-
+  <!-- 設定檔 -->
   <script src="./js/config.js"></script>
+  <!-- 主邏輯 -->
   <script src="./js/status.js"></script>
-  
 </body>
 </html>
