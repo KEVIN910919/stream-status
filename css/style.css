@@ -1,1 +1,30 @@
+body {
+  margin: 0;
+  padding: 16px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: transparent;
+}
 
+.card {
+  max-width: 320px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.title {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+#status {
+  margin-bottom: 8px;
+}
+
+.status.live {
+  color: #2ecc71;
+}
+
+.status.offline {
+  color: #888;
+}
