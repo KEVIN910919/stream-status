@@ -6,8 +6,8 @@ const CONFIG = {
       twitch: {
         channel: "mo_chan_neko",
         customProfile: true,
-        name: "自訂顯示名稱",
-        avatar: "https://example.com/custom-avatar.png"
+        name: "陌塵マコト",
+        avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/1b919743-51db-4e52-b7d2-9dae2c9e90d9-profile_image-70x70.jpeg"
       }
     },
     {
