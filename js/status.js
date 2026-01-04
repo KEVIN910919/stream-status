@@ -62,24 +62,35 @@ CONFIG.channels.forEach(channel => {
   }
 
   /* =========================
-     YouTube（展示型偵測）
+     YouTube（Cloudflare Worker 真實偵測）
      ========================= */
   if (channel.platform === "youtube") {
     platformEl.textContent = "YouTube";
     platformEl.className = "platform youtube";
-    linkEl.href = `https://www.youtube.com/channel/${channel.youtube.channelId}`;
 
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://www.youtube.com/embed/live_stream?channel=${channel.youtube.channelId}`;
-    iframe.style.display = "none";
-    document.body.appendChild(iframe);
+    // 預設先連頻道
+    linkEl.href = `https://www.youtube.com/${channel.id}`;
 
-    setTimeout(() => {
-      // 展示型判斷（GitHub Pages 限制下的最佳解）
-      statusEl.textContent = "⚫ 未偵測到直播";
-      statusEl.className = "status offline";
-      card.classList.remove("live");
-      iframe.remove();
-    }, 2000);
+    fetch(`${CONFIG.apiEndpoint}?channel=${encodeURIComponent(channel.id)}`)
+      .then(r => r.json())
+      .then(data => {
+        if (data.live) {
+          statusEl.textContent = "🟢 正在直播中";
+          statusEl.className = "status live";
+          card.classList.add("live");
+
+          // Live 時導向直播頁
+          linkEl.href = `https://www.youtube.com/channel/${data.channelId}/live`;
+        } else {
+          statusEl.textContent = "⚫ 目前未直播";
+          statusEl.className = "status offline";
+          card.classList.remove("live");
+        }
+      })
+      .catch(() => {
+        statusEl.textContent = "狀態讀取失敗";
+        statusEl.className = "status offline";
+        card.classList.remove("live");
+      });
   }
 });
