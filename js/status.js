@@ -24,30 +24,15 @@ CONFIG.channels.forEach(channel => {
   const statusEl = card.querySelector(".status");
   const linkEl = card.querySelector(".link");
 
-  /* ======================
-     Twitch only
-  ====================== */
-  if (channel.platform === "twitch") {
+  /* ===== 共用顯示資料（完全自訂） ===== */
+  avatarEl.src = channel.avatar;
+  nameEl.textContent = channel.name;
 
+  /* ===== Twitch ===== */
+  if (channel.platform === "twitch") {
     platformEl.textContent = "Twitch";
     linkEl.href = `https://twitch.tv/${channel.twitch.channel}`;
 
-    /* ===== 顯示名稱 / 頭像 ===== */
-    if (channel.twitch.customProfile) {
-      // 🔹 使用自訂資料
-      avatarEl.src = channel.twitch.avatar;
-      nameEl.textContent = channel.twitch.name;
-    } else {
-      // 🔹 使用 Twitch 官方資料
-      fetch(`https://decapi.me/twitch/user/${channel.twitch.channel}`)
-        .then(r => r.json())
-        .then(user => {
-          avatarEl.src = user.profile_image_url;
-          nameEl.textContent = user.display_name;
-        });
-    }
-
-    /* ===== 直播狀態 ===== */
     fetch(`https://decapi.me/twitch/uptime/${channel.twitch.channel}`)
       .then(r => r.text())
       .then(text => {
@@ -64,14 +49,9 @@ CONFIG.channels.forEach(channel => {
       });
   }
 
-  /* ======================
-     YouTube only（展示型）
-  ====================== */
+  /* ===== YouTube（展示型） ===== */
   if (channel.platform === "youtube") {
-
     platformEl.textContent = "YouTube";
-    avatarEl.src = channel.youtube.avatar;
-    nameEl.textContent = channel.youtube.name;
     linkEl.href = `https://www.youtube.com/channel/${channel.youtube.channelId}`;
 
     const iframe = document.createElement("iframe");
@@ -85,5 +65,4 @@ CONFIG.channels.forEach(channel => {
       iframe.remove();
     }, 2000);
   }
-
 });
