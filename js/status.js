@@ -24,36 +24,45 @@ CONFIG.channels.forEach(channel => {
   const statusEl = card.querySelector(".status");
   const linkEl = card.querySelector(".link");
 
-  /* ===== Twitch 使用者資訊 ===== */
-  fetch(`https://decapi.me/twitch/user/${channel.twitch.channel}`)
-    .then(r => r.json())
-    .then(user => {
-      avatarEl.src = user.profile_image_url;
-      nameEl.textContent = user.display_name;
-      platformEl.textContent = "Twitch";
-      linkEl.href = `https://twitch.tv/${channel.twitch.channel}`;
-    });
+  /* ======================
+     Twitch only
+  ====================== */
+  if (channel.platform === "twitch") {
 
-  /* ===== Twitch 直播狀態 ===== */
-  fetch(`https://decapi.me/twitch/uptime/${channel.twitch.channel}`)
-    .then(r => r.text())
-    .then(text => {
-      if (text.toLowerCase().includes("offline")) {
-        checkYouTube();
-      } else {
-        statusEl.textContent = "🟢 Twitch 直播中";
-        statusEl.className = "status live";
-      }
-    })
-    .catch(() => {
-      statusEl.textContent = "狀態讀取失敗";
-    });
+    platformEl.textContent = "Twitch";
+    linkEl.href = `https://twitch.tv/${channel.twitch.channel}`;
 
-  /* ===== YouTube（展示型偵測） ===== */
-  function checkYouTube() {
+    fetch(`https://decapi.me/twitch/user/${channel.twitch.channel}`)
+      .then(r => r.json())
+      .then(user => {
+        avatarEl.src = user.profile_image_url;
+        nameEl.textContent = user.display_name;
+      });
+
+    fetch(`https://decapi.me/twitch/uptime/${channel.twitch.channel}`)
+      .then(r => r.text())
+      .then(text => {
+        if (text.toLowerCase().includes("offline")) {
+          statusEl.textContent = "⚫ 目前未開台";
+          statusEl.className = "status offline";
+        } else {
+          statusEl.textContent = "🟢 正在直播中";
+          statusEl.className = "status live";
+        }
+      })
+      .catch(() => {
+        statusEl.textContent = "狀態讀取失敗";
+      });
+  }
+
+  /* ======================
+     YouTube only（展示型）
+  ====================== */
+  if (channel.platform === "youtube") {
+
+    platformEl.textContent = "YouTube";
     avatarEl.src = channel.youtube.avatar;
     nameEl.textContent = channel.youtube.name;
-    platformEl.textContent = "YouTube";
     linkEl.href = `https://www.youtube.com/channel/${channel.youtube.channelId}`;
 
     const iframe = document.createElement("iframe");
@@ -67,4 +76,5 @@ CONFIG.channels.forEach(channel => {
       iframe.remove();
     }, 2000);
   }
+
 });
