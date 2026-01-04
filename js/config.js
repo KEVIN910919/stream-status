@@ -1,5 +1,6 @@
 const CONFIG = {
   apiEndpoint: "https://crimson-shadow-c09a.kevin-tsui910919.workers.dev",
+  twitchParent: kevin910919.github.io,
   
   channels: [
     {
