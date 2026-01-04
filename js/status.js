@@ -84,7 +84,7 @@ CONFIG.channels.forEach(channel => {
   }
 
   /* =========================
-     YouTube（Cloudflare Worker 真實偵測）
+     YouTube
      ========================= */
   if (channel.platform === "youtube") {
     platformEl.textContent = "YouTube";
@@ -92,6 +92,8 @@ CONFIG.channels.forEach(channel => {
 
     // 預設連到頻道首頁
     linkEl.href = `https://www.youtube.com/channel/${channel.id}`;
+
+    const previewEl = card.querySelector(".preview");
 
     // 🔑 快取破壞（避免瀏覽器 / CF 快取）
     const ts = Date.now();
@@ -110,13 +112,28 @@ CONFIG.channels.forEach(channel => {
           statusEl.className = "status live";
           card.classList.add("live");
 
-          // 直接導向直播頁
+          // 直播連結
           linkEl.href = data.url;
-        } else {
+
+          // 🎥 顯示直播預覽
+          previewEl.innerHTML = `
+            <iframe
+              src="https://www.youtube.com/embed/${data.videoId}?autoplay=0&mute=1"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          `;
+          previewEl.classList.remove("hidden");
+
+       } else {
           // ⚫ 未直播
           statusEl.textContent = "⚫ 目前未直播";
-          statusEl.className = "status offline";
+         statusEl.className = "status offline";
           card.classList.remove("live");
+
+          // 隱藏預覽
+          previewEl.innerHTML = "";
+          previewEl.classList.add("hidden");
         }
       })
       .catch(err => {
@@ -124,6 +141,10 @@ CONFIG.channels.forEach(channel => {
         statusEl.textContent = "狀態讀取失敗";
         statusEl.className = "status offline";
         card.classList.remove("live");
+
+        // 保險：錯誤時也不顯示預覽
+        previewEl.innerHTML = "";
+        previewEl.classList.add("hidden");
       });
   }
 });
