@@ -1,5 +1,5 @@
 /* =========================
-   Font (可自由更換)
+   Font
    ========================= */
 @font-face {
   font-family: "GenSenRounded";
@@ -13,29 +13,23 @@
    Dreamlight Dark Theme
    ========================= */
 :root {
-  /* 外部背景是 #3c364a，本模組不覆蓋 */
-
-  /* 模組 / 卡片 */
   --module-border: rgba(255, 255, 255, 0.14);
   --module-inner: rgba(0, 0, 0, 0.25);
 
   --card-bg: rgba(255, 255, 255, 0.06);
   --card-border: rgba(255, 255, 255, 0.12);
 
-  /* 文字 */
   --text-main: #f1f1f6;
   --text-sub: #b6b6c6;
 
-  /* 平台色 */
   --twitch: #a88bff;
   --youtube: #ff6b6b;
 
-  /* Live */
-  --live-glow: rgba(150, 200, 255, 0.35);
+  --live-glow: rgba(150, 200, 255, 0.45);
 }
 
 /* =========================
-   Page (不動背景)
+   Page
    ========================= */
 body {
   margin: 0;
@@ -46,12 +40,11 @@ body {
 }
 
 /* =========================
-   Module Container (特色來源)
+   Module
    ========================= */
 .module {
   padding: 18px;
   border-radius: 18px;
-
   border: 1px solid var(--module-border);
 
   box-shadow:
@@ -60,12 +53,12 @@ body {
 }
 
 /* =========================
-   Channel List
+   Channel List (橫向＋自動換行)
    ========================= */
 .list {
   display: grid;
   gap: 14px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 }
 
 /* =========================
@@ -78,25 +71,30 @@ body {
   border-radius: 14px;
   padding: 14px 14px 14px 18px;
 
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
 }
 
 .card.live {
   box-shadow:
-    0 0 0 1px rgba(160, 210, 255, 0.25),
-    0 10px 28px rgba(0, 0, 0, 0.45);
+    0 0 0 1px rgba(160, 210, 255, 0.3),
+    0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 /* =========================
    Platform Identity Line
+   ⚠️ 需要 JS 設 data-platform
    ========================= */
 .card[data-platform="twitch"]::before,
 .card[data-platform="youtube"]::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 12px;
-  bottom: 12px;
+  top: 14px;
+  bottom: 14px;
   width: 3px;
   border-radius: 2px;
 }
@@ -132,7 +130,7 @@ body {
 
 .card.live .avatar {
   border-color: var(--live-glow);
-  box-shadow: 0 0 8px var(--live-glow);
+  box-shadow: 0 0 10px var(--live-glow);
 }
 
 /* =========================
@@ -141,6 +139,7 @@ body {
 .name {
   font-size: 14px;
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .platform {
@@ -168,11 +167,7 @@ body {
 }
 
 .status.live {
-  color: #cde6ff;
-}
-
-.status.offline {
-  color: var(--text-sub);
+  color: #d6ecff;
 }
 
 /* =========================
